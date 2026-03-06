@@ -194,7 +194,7 @@
         <div class="columns is-centered">
           <div class="column has-text-centered">
             <!-- TODO: Replace with your paper title -->
-            <h1 class="title is-1 publication-title">Optimising Neural Speech Codecs for 200bps Communication using Reinforcement Learning </h1>
+            <h1 class="title is-1 publication-title">Optimising Neural Speech Codecs for 200bps Communication using Reinforcement Learning</h1>
             <div class="is-size-5 publication-authors">
               <!-- TODO: Replace with your paper authors and their personal links -->
               <span class="author-block">Anonymous Authors</span>
@@ -211,23 +211,21 @@
 </section>
 
 
-<!-- Teaser video-->
+<!-- Teaser image-->
 <section class="hero teaser">
   <div class="container is-max-desktop">
-    <div class="hero-body">
-      <!-- TODO: Replace with your teaser video -->
-      <video poster="" id="tree" autoplay controls muted loop height="100%" preload="metadata">
-        <!-- TODO: Add your video file path here -->
-        <source src="static/videos/banner_video.mp4" type="video/mp4">
-      </video>
-      <!-- TODO: Replace with your video description -->
-      <h2 class="subtitle has-text-centered">
-        Aliquam vitae elit ullamcorper tellus egestas pellentesque. Ut lacus tellus, maximus vel lectus at, placerat pretium mi. Maecenas dignissim tincidunt vestibulum. Sed consequat hendrerit nisl ut maximus. 
+    <div class="hero-body has-text-centered">
+      <img src="static/images/claricodec.png" alt="ClariCodec Training Framework" style="max-width:100%; height:auto;" loading="lazy"/>
+      <h2 class="subtitle has-text-centered" style="margin-top: 1rem;">
+        Overview of the two-stage training framework of <b>ClariCodec</b>.
+        In Stage 1, the full codec is trained end-to-end using a combination of L1 mel reconstruction loss, adversarial loss, and feature matching loss to ensure high-fidelity speech reconstruction.
+        In Stage 2, all modules excpet the encoder are frozen, and the encoder is fine-tuned using an RL objective where the reward signal is derived from a pretrained ASR model, explicitly optimizing for speech intelligibility.
+        An L_1 mel reconstruction loss is used for preventing perceptual degradation during RL optimization.
       </h2>
     </div>
   </div>
 </section>
-<!-- End teaser video -->
+<!-- End teaser image -->
 
 <!-- Paper abstract -->
 <section class="section hero is-light">
@@ -236,9 +234,12 @@
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
-          <!-- TODO: Replace with your paper abstract -->
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ullamcorper tellus sed ante aliquam tempus. Etiam porttitor urna feugiat nibh elementum, et tempor dolor mattis. Donec accumsan enim augue, a vulputate nisi sodales sit amet. Proin bibendum ex eget mauris cursus euismod nec et nibh. Maecenas ac gravida ante, nec cursus dui. Vivamus purus nibh, placerat ac purus eget, sagittis vestibulum metus. Sed vestibulum bibendum lectus gravida commodo. Pellentesque auctor leo vitae sagittis suscipit.
+            In bandwidth-constrained communication such as satellite and underwater channels, speech must often be transmitted at ultra-low bitrates where intelligibility is the primary objective.
+            At such extreme compression levels, codecs trained with acoustic reconstruction losses tend to allocate bits to perceptual detail, leading to substantial degradation in word error rate (WER).
+            This paper proposes ClariCodec, a neural speech codec operating at 200 bit per second (bps) that reformulates quantisation as a stochastic policy, enabling reinforcement learning (RL) based optimisation of intelligibility.
+            Specifically, the encoder is fine-tuned using WER-driven rewards while the acoustic reconstruction pipeline remains frozen. Even without RL, ClariCodec achieves 3.68% WER on the LibriSpeech test-clean set at 200 bps, already competitive with codecs operating at higher bitrates.
+            Further RL fine-tuning reduces WER to 3.20% on test-clean and 8.93\% on test-other, corresponding to a 13% relative reduction while preserving perceptual quality.
           </p>
         </div>
       </div>
