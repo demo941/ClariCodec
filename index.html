@@ -83,6 +83,72 @@
   <!-- Critical CSS - Load synchronously -->
   <link rel="stylesheet" href="static/css/bulma.min.css">
   <link rel="stylesheet" href="static/css/index.css">
+  <style>
+
+/* ---- Global page style ---- */
+.hero.is-light {
+  background-color: #ffffff !important;
+}
+
+/* ---- Audio player ---- */
+audio {
+  width: 180px !important;
+  height: 32px !important;
+  display: block !important;
+  margin: 6px auto !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+}
+
+/* ---- Audio Table Universal Fix ---- */
+.table-container {
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  margin: 0 auto !important; /* 关键：表格容器水平居中 */
+  width: fit-content !important; /* 关键：宽度自适应内容 */
+}
+
+.table.audio-table {
+  width: max-content !important;     /* 宽度随内容 */
+  table-layout: fixed !important;    /* 固定列宽防止跳动 */
+  border-collapse: collapse !important;
+  border: none !important;
+}
+
+.table.audio-table th,
+.table.audio-table td {
+  width: 200px !important;           /* 每列固定宽度 */
+  white-space: nowrap !important;    /* 禁止换行 */
+  overflow: visible !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding: 8px 6px !important;
+}
+
+.table.audio-table th:first-child,
+.table.audio-table td:first-child {
+  width: 120px !important;
+  text-align: left !important; /* 关键：第一列左对齐（行标题） */
+  padding-left: 16px !important; /* 增加左侧留白 */
+}
+
+/* 去掉 bulma 默认背景色 */
+.table.audio-table,
+.table.audio-table th,
+.table.audio-table td {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* hover 效果轻微 */
+.table.audio-table.is-hoverable tbody tr:hover {
+  background-color: #f9f9f9 !important;
+}
+
+    </style>
+
   
   <!-- Non-critical CSS - Load asynchronously -->
   <link rel="preload" href="static/css/bulma-carousel.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -248,146 +314,162 @@
 </section>
 <!-- End paper abstract -->
 
-
-<!-- Image carousel -->
-<section class="hero is-small">
+<!-- Main Results Samples -->
+<section class="hero is-small is-light">
   <div class="hero-body">
     <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- TODO: Replace with your research result images -->
-        <img src="static/images/carousel1.jpg" alt="First research result visualization" loading="lazy"/>
-        <!-- TODO: Replace with description of this result -->
-        <h2 class="subtitle has-text-centered">
-          First image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel2.jpg" alt="Second research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-          Second image description.
-        </h2>
-      </div>
-      <div class="item">
-        <!-- Your image here -->
-        <img src="static/images/carousel3.jpg" alt="Third research result visualization" loading="lazy"/>
-        <h2 class="subtitle has-text-centered">
-         Third image description.
-       </h2>
-     </div>
-     <div class="item">
-      <!-- Your image here -->
-      <img src="static/images/carousel4.jpg" alt="Fourth research result visualization" loading="lazy"/>
-      <h2 class="subtitle has-text-centered">
-        Fourth image description.
+      <h2 class="title is-3 has-text-centered">Main Results Samples
       </h2>
+
+      <div class="table-container">
+        <table class="table is-hoverable audio-table">
+               <caption>
+                <b>Table 1.</b>  Speech reconstruction samples in main results. Samples~1-3 are clean, Samples~4-6 are noisy.
+              </caption>
+          <thead style="border:none;">
+            <tr style="border:none;">
+              <th style="border:none;"></th>
+              <th>Ground Truth</th>
+              <th>ClariCodec w/o RL</th>
+              <th>ClariCodec</th>
+              <th>Encodec</th>
+              <th>StableCodec-700</th>
+              <th>FlexiCodec</th>
+              <th>SAC</th>
+              <th>WavTokenizer</th>
+              <th>Socodec</th>
+              <th>StableCodec-400</th>
+              <th>SemantiCodec</th>
+              <th>LSCodec</th>
+            </tr>
+          </thead>
+          <tbody style="border:none;">
+            <!-- Row: Bitrate -->
+            <tr style="border:none;">
+              <td><b>bitrate per second</b></td>
+              <td>-</td>
+              <td>200</td>
+              <td>200</td>
+              <td>750</td>
+              <td>700</td>
+              <td>640</td>
+              <td>525</td>
+              <td>480</td>
+              <td>466</td>
+              <td>400</td>
+              <td>312.5</td>
+              <td>250</td>
+            </tr>
+
+            <!-- Row: Sample 1 -->
+            <tr style="border:none;">
+              <td><b>sample1</b></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/gt/clean/61-70968-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/clar_wo_rl/clean/61-70968-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/clari/clean/61-70968-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/encodec/clean/61-70968-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/stable700/clean/61-70968-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/flexi/clean/61-70968-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/sac/clean/61-70968-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/wavtokenizer/clean/61-70968-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/socodec/clean/61-70968-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/stable400/clean/61-70968-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/semanti/clean/61-70968-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/lscodec/clean/61-70968-0000.wav" type="audio/wav"></audio></td>
+            </tr>
+
+            <!-- Row: Sample 2 -->
+            <tr style="border:none;">
+              <td><b>sample2</b></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/gt/clean/121-121726-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/clari_wo_rl/clean/121-121726-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/clari/clean/121-121726-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/encodec/clean/121-121726-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/stable700/clean/121-121726-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/flexi/clean/121-121726-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/sac/clean/121-121726-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/wavtokenizer/clean/121-121726-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/socodec/clean/121-121726-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/stable400/clean/121-121726-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/semanti/clean/121-121726-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/lscodec/clean/121-121726-0000.wav" type="audio/wav"></audio></td>
+            </tr>
+
+            <!-- Row: Sample 3 -->
+            <tr style="border:none;">
+              <td><b>sample3</b></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/gt/clean/1995-1826-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/clari_wo_rl/clean/1995-1826-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/clari/clean/1995-1826-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/encodec/clean/1995-1826-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/stable700/clean/1995-1826-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/flexi/clean/1995-1826-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/sac/clean/1995-1826-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/wavtokenizer/clean/1995-1826-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/socodec/clean/1995-1826-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/stable400/clean/1995-1826-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/semanti/clean/1995-1826-0000.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/lscodec/clean/1995-1826-0000.wav" type="audio/wav"></audio></td>
+            </tr>
+
+            <!-- Row: Sample 4 -->
+            <tr style="border:none;">
+              <td><b>sample4</b></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/gt/other/9131-117029-0018.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/clari_wo_rl/other/9131-117029-0018.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/clari/other/9131-117029-0018.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/encodec/other/9131-117029-0018.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/stable700/other/9131-117029-0018.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/flexi/other/9131-117029-0018.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/sac/other/9131-117029-0018.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/wavtokenizer/other/9131-117029-0018.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/socodec/other/9131-117029-0018.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/stable400/other/9131-117029-0018.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/semanti/other/9131-117029-0018.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/lscodec/other/9131-117029-0018.wav" type="audio/wav"></audio></td>
+            </tr>
+
+            <!-- Row: Sample 5 -->
+            <tr style="border:none;">
+              <td><b>sample5</b></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/gt/other/8280-266249-0027.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/clari_wo_rl/other/8280-266249-0027.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/clari/other/8280-266249-0027.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/encodec/other/8280-266249-0027.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/stable700/other/8280-266249-0027.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/flexi/other/8280-266249-0027.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/sac/other/8280-266249-0027.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/wavtokenizer/other/8280-266249-0027.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/socodec/other/8280-266249-0027.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/stable400/other/8280-266249-0027.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/semanti/other/8280-266249-0027.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/lscodec/other/8280-266249-0027.wav" type="audio/wav"></audio></td>
+            </tr>
+
+            <!-- Row: Sample 6 -->
+            <tr style="border:none;">
+              <td><b>sample6</b></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/gt/other/8461-281231-0038.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/clari_wo_rl/other/8461-281231-0038.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/clari/other/8461-281231-0038.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/encodec/other/8461-281231-0038.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/stable700/other/8461-281231-0038.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/flexi/other/8461-281231-0038.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/sac/other/8461-281231-0038.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/wavtokenizer/other/8461-281231-0038.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/socodec/other/8461-281231-0038.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/stable400/other/8461-281231-0038.wav" type="audio/wav"></audio></td>
+              <td><audio controls preload="metadata" style="width:180px;"><source src="static/audio/semanti/other/8461-281231-0038.wav" type="audio/wav"></audio></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
   </div>
-</div>
-</div>
 </section>
-<!-- End image carousel -->
+<!-- End Main Results -->
 
-
-
-
-<!-- Youtube video -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <!-- Paper video. -->
-      <h2 class="title is-3">Video Presentation</h2>
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          
-          <div class="publication-video">
-            <!-- TODO: Replace with your YouTube video ID -->
-            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End youtube video -->
-
-
-<!-- Video carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3">Another Carousel</h2>
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-video1">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video1" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel1.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video2">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video2" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel2.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-video3">
-          <!-- TODO: Add poster image for better preview -->
-          <video poster="" id="video3" controls muted loop height="100%" preload="metadata">
-            <!-- Your video file here -->
-            <source src="static/videos/carousel3.mp4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End video carousel -->
-
-
-
-
-
-
-<!-- Paper poster -->
-<section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title">Poster</h2>
-
-      <!-- TODO: Replace with your poster PDF -->
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
-          </iframe>
-        
-      </div>
-    </div>
-  </section>
-<!--End paper poster -->
-
-
-
-<!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <div class="bibtex-header">
-        <h2 class="title">BibTeX</h2>
-        <button class="copy-bibtex-btn" onclick="copyBibTeX()" title="Copy BibTeX to clipboard">
-          <i class="fas fa-copy"></i>
-          <span class="copy-text">Copy</span>
-        </button>
-      </div>
-      <pre id="bibtex-code"><code>@article{YourPaperKey2024,
-  title={Your Paper Title Here},
-  author={First Author and Second Author and Third Author},
-  journal={Conference/Journal Name},
-  year={2024},
-  url={https://your-domain.com/your-project-page}
-}</code></pre>
-    </div>
-</section>
-<!--End BibTex citation -->
 
 
   <footer class="footer">
