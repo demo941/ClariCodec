@@ -1,0 +1,63 @@
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Python environments and packaging
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+env/
+build/
+dist/
+*.egg-info/
+
+# Editors and operating systems
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Experiment outputs
+runs/
+logs/
+checkpoints/
+outputs/
+results/
+artifacts/
+wandb/
+tensorboard/
+events.out.tfevents.*
+
+# Local datasets and WebDataset shards
+data/
+datasets/
+*.tar
+*.tar.gz
+*.tgz
+
+# Model checkpoints and exported models
+*.pt
+*.pth
+*.ckpt
+*.nemo
+*.safetensors
+*.onnx
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+core.*

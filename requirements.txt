@@ -1,0 +1,24 @@
+# Core numerical and audio stack
+torch==2.7.1
+torchaudio==2.7.1
+numpy==1.26.4
+scipy==1.16.3
+librosa==0.11.0
+soundfile==0.13.1
+
+# Model and training utilities
+einops==0.8.1
+PyYAML==6.0.3
+omegaconf==2.3.0
+tensorboard==2.20.0
+webdataset==1.0.2
+tqdm==4.67.1
+rich==14.2.0
+
+# ASR and evaluation
+nemo_toolkit[asr]==2.6.0
+openai-whisper==20250625
+whisper-normalizer==0.1.12
+jiwer==3.1.0
+pystoi==0.4.1
+pesq==0.0.4
