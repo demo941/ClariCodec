@@ -16,7 +16,7 @@ Junyi Wang, Chi Zhang, Jing Qian, Haifeng Luo, Hao Wang, Zengrui Jin, and Chao Z
 
 ClariCodec is a neural speech codec designed for intelligibility-critical communication under severe bandwidth constraints. It operates at 300 bits per second (bps), reformulates quantisation as a stochastic policy, and uses Group Relative Policy Optimisation (GRPO) with word-error-rate rewards to fine-tune the encoder while keeping the acoustic reconstruction pipeline frozen.
 
-This repository contains non-streaming and streaming implementations for first-stage codec training, reinforcement-learning fine-tuning, inference, and evaluation. Datasets, ASR models, and codec checkpoints are not distributed in this repository and must be prepared separately.
+This repository contains non-streaming and streaming implementations for first-stage codec training, reinforcement-learning fine-tuning, inference, and evaluation. 
 
 ## Highlights
 
