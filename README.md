@@ -46,6 +46,37 @@ pip install -r requirements.txt
 
 Install the PyTorch build appropriate for your CUDA driver if it differs from the environment above. Remote WebDataset streaming additionally requires `rclone`. WER evaluation through NeMo may require system audio tools such as FFmpeg and libsndfile.
 
+## Pretrained Checkpoints
+
+The paper was accepted at **SLT 2026**. We release all four 300 bps models used in the main comparisons. The RL models are recommended for inference; the Stage 1 models are provided for comparison and further RL fine-tuning.
+
+| Model | LibriSpeech test-clean WER | Theoretical latency | Download | Configuration |
+|---|---:|---:|---|---|
+| Non-streaming Stage 1 | 4.64% | Offline | [Checkpoint](https://github.com/demo941/ClariCodec/releases/download/v1.0.0/claricodec-300bps-nonstreaming-stage1.tar) | [YAML](configs/pretrained/nonstreaming-stage1.yaml) |
+| **Non-streaming RL** | **3.55%** | Offline | [Checkpoint](https://github.com/demo941/ClariCodec/releases/download/v1.0.0/claricodec-300bps-nonstreaming-rl.tar) | [YAML](configs/pretrained/nonstreaming-rl.yaml) |
+| Streaming Stage 1 | 6.63% | 374 ms | [Checkpoint](https://github.com/demo941/ClariCodec/releases/download/v1.0.0/claricodec-300bps-streaming-stage1.tar) | [YAML](configs/pretrained/streaming-stage1.yaml) |
+| **Streaming RL** | **4.53%** | **374 ms** | [Checkpoint](https://github.com/demo941/ClariCodec/releases/download/v1.0.0/claricodec-300bps-streaming-rl.tar) | [YAML](configs/pretrained/streaming-rl.yaml) |
+
+Each archive contains `codec.pt` (encoder, complete quantizer, and decoder), `vocos.pt` (Vocos backbone and ISTFT head), `config.yaml`, model metadata, and the MIT license. Weights retain their original FP32 precision. Optimizer and discriminator states are not included. Checkpoint step counts in the metadata refer to the corresponding training stage.
+
+Download one model, or all four:
+
+```bash
+python tools/download_checkpoints.py --model nonstreaming-rl
+python tools/download_checkpoints.py --model streaming-rl
+# Optional: download the Stage 1 models as well.
+python tools/download_checkpoints.py --model all
+```
+
+The downloader extracts each model into `checkpoints/<model-name>/`. Run the following commands from the repository root after setting `test_input_wavs_dir` in the selected YAML to a directory of input WAV files:
+
+```bash
+python tools/inference.py --config configs/pretrained/nonstreaming-rl.yaml
+python tools/inference_streaming.py --config configs/pretrained/streaming-rl.yaml
+```
+
+For Stage 1 inference, select the corresponding `nonstreaming-stage1.yaml` or `streaming-stage1.yaml`. The bundled `checkpoints/<model-name>/config.yaml` can also be used directly. Audio is mono at 16 kHz, with a 12.5 Hz code-frame rate and 300 bps bitrate. Inference runs locally without downloading an ASR model.
+
 ## Data Preparation
 
 Training uses WebDataset tar shards. Set `train_shards_path` in the selected YAML configuration to a text file containing one local or rclone-accessible shard per line:
